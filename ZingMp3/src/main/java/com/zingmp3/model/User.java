@@ -28,7 +28,7 @@ public class User {
 
     private String image;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles")
     private Set<Role> roles;
 
