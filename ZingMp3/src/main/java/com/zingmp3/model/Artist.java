@@ -9,11 +9,11 @@ import javax.persistence.Id;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    String description;
+    private String description;
 
     public Artist(Long id, String name, String description) {
         this.id = id;

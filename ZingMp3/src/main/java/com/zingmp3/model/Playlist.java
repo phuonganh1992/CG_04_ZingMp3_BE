@@ -7,17 +7,17 @@ import java.util.Set;
 public class Playlist {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+     private Long id;
 
-    String name;
+    private String name;
 
-    String description;
+    private String description;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    Set<Artist> artists;
+    private Set<Artist> artists;
 
     @ManyToOne
-    User user;
+    private User user;
 
     public Playlist(Long id, String name, String description, Set<Artist> artists, User user) {
         this.id = id;

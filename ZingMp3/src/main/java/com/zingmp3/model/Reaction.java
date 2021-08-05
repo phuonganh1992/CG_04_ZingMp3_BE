@@ -6,14 +6,14 @@ import javax.persistence.*;
 public class Reaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    Long likes;
+    private Long likes;
 
-    Long views;
+    private Long views;
 
     @ManyToOne
-    Song song;
+    private Song song;
 
     public Reaction() {
     }

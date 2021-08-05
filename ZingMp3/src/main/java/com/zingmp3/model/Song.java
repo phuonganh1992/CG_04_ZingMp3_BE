@@ -10,24 +10,24 @@ import java.util.Set;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    String description;
+    private String description;
 
-    String img;
+    private String img;
 
-    LocalDate createDate;
+    private LocalDate createDate;
 
     @ManyToOne
-    Artist artist;
+    private Artist artist;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    Set<Playlist> playlists;
+    private Set<Playlist> playlists;
 
     @ManyToOne
-    User user;
+    private User user;
 
     public Song() {
     }

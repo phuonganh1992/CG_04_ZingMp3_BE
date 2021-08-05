@@ -7,16 +7,16 @@ import java.time.LocalDate;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String content;
+    private String content;
 
-    LocalDate createDate;
+    private LocalDate createDate;
 
-    Long likes;
+    private Long likes;
 
     @ManyToOne
-    Song song;
+    private Song song;
     @ManyToOne
-    User user;
+    private User user;
 }
