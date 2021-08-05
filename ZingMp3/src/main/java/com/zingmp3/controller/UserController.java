@@ -55,6 +55,8 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
 
+//    @GetMapping("/login-google")
+
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);
