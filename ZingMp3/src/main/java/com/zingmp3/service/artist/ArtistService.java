@@ -32,7 +32,7 @@ artistRepository.deleteById(id);
     }
 
     @Override
-    public Artist findByName(String name) {
-        return artistRepository.findByName(name);
+    public Iterable<Artist> findAllByName(String name) {
+        return artistRepository.findAllByNameContaining(name);
     }
 }
