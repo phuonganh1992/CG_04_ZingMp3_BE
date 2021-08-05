@@ -28,4 +28,8 @@ public class CustomOauth2User implements OAuth2User {
     public String getName() {
         return oauth2User.getAttribute("name");
     }
+
+    public String getFullName(){
+        return oauth2User.getAttribute("name");
+    }
 }

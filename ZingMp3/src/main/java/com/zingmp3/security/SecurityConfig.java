@@ -62,21 +62,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
                 .and().csrf().disable();
 
-        http.authorizeRequests()
-                .antMatchers("/oauth2/**").permitAll()
-                .and().formLogin()//
-                .loginProcessingUrl("/j_spring_security_login")
-                .loginPage("/login")
-                .defaultSuccessUrl("/user")
-//                .failureUrl("/login?message=error")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-                .and()
-                .oauth2Login()
-                    .loginPage("/login")
-                    .userInfoEndpoint().userService(oauth2UserService);
-
-//                .and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login?message=logout");
+//        http.authorizeRequests()
+//                .antMatchers("/oauth2/**","/login").permitAll()
+//                .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
+//                .and()
+//                .formLogin()//
+//                    .loginProcessingUrl("/j_spring_security_login")
+//                    .loginPage("/login")
+//                    .defaultSuccessUrl("/")
+//                .and()
+//                .logout().permitAll()
+//                .and()
+//                .oauth2Login()
+//                    .loginPage("/login")
+//                    .userInfoEndpoint().userService(oauth2UserService);
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
