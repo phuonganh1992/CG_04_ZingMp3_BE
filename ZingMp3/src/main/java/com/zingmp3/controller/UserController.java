@@ -50,7 +50,6 @@ public class UserController {
 
         String jwt = jwtService.generateTokenLogin(authentication);
         UserPrinciple userPrinciple= (UserPrinciple) authentication.getPrincipal();
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userService.findByUsername(user.getUsername()).get();
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
