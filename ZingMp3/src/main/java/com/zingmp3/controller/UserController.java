@@ -15,10 +15,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -29,20 +30,25 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/list")
-    public ResponseEntity<Iterable<User>> findAll(){
+    @GetMapping("/login")
+    public ModelAndView showLoginForm(){
+        return new ModelAndView("/user/login");
+    }
+
+    @GetMapping("/api/list")
+    public ResponseEntity<Iterable<User>> findAllApi(){
         Iterable<User> users= userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user){
+    @PostMapping("/api/register")
+    public ResponseEntity<?> registerApi(@RequestBody User user){
         userService.save(user);
         return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
+    @PostMapping("/api/login")
+    public ResponseEntity<?> loginApi(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
@@ -54,8 +60,10 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
+//    @GetMapping("/login-google")
+
+    @GetMapping("/api/hello")
+    public ResponseEntity<String> helloApi() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);
     }
 }
