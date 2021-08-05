@@ -20,10 +20,6 @@ public class Song {
 
     LocalDate createDate;
 
-    Long likes;
-
-    Long views;
-
     @ManyToOne
     Artist artist;
 
@@ -36,26 +32,22 @@ public class Song {
     public Song() {
     }
 
-    public Song(Long id, String name, String description, String img, LocalDate createDate, Long likes, Long views, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(Long id, String name, String description, String img, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.img = img;
         this.createDate = createDate;
-        this.likes = likes;
-        this.views = views;
         this.artist = artist;
         this.playlists = playlists;
         this.user = user;
     }
 
-    public Song(String name, String description, String img, LocalDate createDate, Long likes, Long views, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(String name, String description, String img, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
         this.name = name;
         this.description = description;
         this.img = img;
         this.createDate = createDate;
-        this.likes = likes;
-        this.views = views;
         this.artist = artist;
         this.playlists = playlists;
         this.user = user;
@@ -99,25 +91,6 @@ public class Song {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-
-
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long like) {
-        this.likes = like;
-    }
-
-    public Long getViews() {
-        return views;
-    }
-
-    public void setViews(Long view) {
-        this.views = view;
     }
 
     public Artist getArtist() {
