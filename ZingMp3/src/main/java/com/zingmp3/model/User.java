@@ -23,13 +23,11 @@ public class User {
     @Email
     private String email;
 
-    @Pattern(regexp = "^[0][1-9]{9}$")
     private String phoneNumber;
 
-    private String image;
+    private String image = "https://firebasestorage.googleapis.com/v0/b/spa-stay.appspot.com/o/img%2F1583085901039?alt=media&token=e396af18-3aa6-49ae-8ffc-22a55124b18a";
 
-    @ManyToMany
-    @JoinTable(name = "users_roles")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public User() {
@@ -65,6 +63,7 @@ public class User {
         this.image = image;
         this.roles = roles;
     }
+
 
     public Set<Role> getRoles() {
         return roles;
