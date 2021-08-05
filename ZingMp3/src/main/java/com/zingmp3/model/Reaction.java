@@ -3,6 +3,7 @@ package com.zingmp3.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "reactions")
 public class Reaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "playlists")
 public class Playlist {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
