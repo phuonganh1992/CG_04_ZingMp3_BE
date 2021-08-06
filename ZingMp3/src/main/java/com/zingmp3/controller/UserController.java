@@ -30,9 +30,9 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/login/oauth2")
+    @GetMapping("/home")
     public ModelAndView showLoginForm() {
-        return new ModelAndView("/user/login");
+        return new ModelAndView("/home");
     }
 
 
