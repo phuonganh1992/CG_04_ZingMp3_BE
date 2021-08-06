@@ -23,14 +23,18 @@ public class User {
     @Email
     private String email;
 
-    @Pattern(regexp = "^[0][1-9]{9}$")
     private String phoneNumber;
 
-    private String image;
+    private String image = "https://firebasestorage.googleapis.com/v0/b/spa-stay.appspot.com/o/img%2F1583085901039?alt=media&token=e396af18-3aa6-49ae-8ffc-22a55124b18a";
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles")
     private Set<Role> roles;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authProvider;
+
+
 
     public User() {
     }
@@ -65,6 +69,7 @@ public class User {
         this.image = image;
         this.roles = roles;
     }
+
 
     public Set<Role> getRoles() {
         return roles;
@@ -128,5 +133,13 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public AuthenticationProvider getAuthProvider() {
+        return authProvider;
+    }
+
+    public void setAuthProvider(AuthenticationProvider authProvider) {
+        this.authProvider = authProvider;
     }
 }

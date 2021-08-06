@@ -3,14 +3,22 @@ package com.zingmp3.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="artist")
+@Table(name = "artists")
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String description;
     private String image;
+
+    public Artist(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
     public Artist() {
     }
