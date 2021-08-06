@@ -30,9 +30,9 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "auth_provider")
-    private AuthenticationProvider authProvider;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "auth_provider")
+//    private AuthenticationProvider authProvider;
 
 
 
@@ -135,11 +135,11 @@ public class User {
         this.image = image;
     }
 
-    public AuthenticationProvider getAuthProvider() {
-        return authProvider;
-    }
-
-    public void setAuthProvider(AuthenticationProvider authProvider) {
-        this.authProvider = authProvider;
-    }
+//    public AuthenticationProvider getAuthProvider() {
+//        return authProvider;
+//    }
+//
+//    public void setAuthProvider(AuthenticationProvider authProvider) {
+//        this.authProvider = authProvider;
+//    }
 }

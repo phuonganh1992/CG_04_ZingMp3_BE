@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ISongRepository extends JpaRepository<Song,Long> {
-   Iterable<Song> findByName(String name);
+public interface ISongRepository extends PagingAndSortingRepository<Song,Long> {
+   Iterable<Song> findAllByNameContaining(String name);
 }
