@@ -4,4 +4,5 @@ import com.zingmp3.service.IGeneralService;
 
 public interface ISongService extends IGeneralService<Song> {
     Iterable<Song> findByName(String name);
+    Iterable<Song> findAllByNameContaining(String name);
 }

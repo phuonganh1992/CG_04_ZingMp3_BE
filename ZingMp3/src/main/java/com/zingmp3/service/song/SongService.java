@@ -34,4 +34,9 @@ public class SongService implements ISongService{
     public Iterable<Song> findByName(String name) {
         return songRepository.findAllByNameContaining(name);
     }
+
+    @Override
+    public Iterable<Song> findAllByNameContaining(String name) {
+        return songRepository.findAllByNameContaining(name);
+    }
 }
