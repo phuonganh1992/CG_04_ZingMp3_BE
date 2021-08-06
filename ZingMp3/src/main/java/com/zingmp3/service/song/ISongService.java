@@ -3,5 +3,5 @@ import com.zingmp3.model.Song;
 import com.zingmp3.service.IGeneralService;
 
 public interface ISongService extends IGeneralService<Song> {
-    Song findByName(String name);
+    Iterable<Song> findByName(String name);
 }

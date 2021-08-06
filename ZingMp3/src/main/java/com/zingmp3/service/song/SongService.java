@@ -1,36 +1,36 @@
 package com.zingmp3.service.song;
 
 import com.zingmp3.model.Song;
+import com.zingmp3.repository.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
 public class SongService implements ISongService{
     @Autowired
-    private  ISongService songService;
+    private ISongRepository songRepository;
     @Override
     public Iterable<Song> findAll() {
-        return songService.findAll() ;
+        return songRepository.findAll();
     }
 
     @Override
     public Optional<Song> findById(Long id) {
-        return songService.findById(id);
+        return songRepository.findById(id);
     }
 
     @Override
     public Song save(Song song) {
-        return songService.save(song);
+        return songRepository.save(song);
     }
 
     @Override
     public void delete(Long id) {
-        songService.delete(id);
-
+        songRepository.deleteById(id);
     }
 
     @Override
-    public Song findByName(String name) {
-        return songService.findByName(name);
+    public Iterable<Song> findByName(String name) {
+        return songRepository.findByName(name);
     }
 }
