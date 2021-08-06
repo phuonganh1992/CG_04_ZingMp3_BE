@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -56,25 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
         http.authorizeRequests()
-//                .antMatchers("/","/api/register","/api/login","/api/hello").permitAll()
                 .antMatchers("/**").permitAll()
+//                .antMatchers("/","/api/register","/api/login","/api/hello").permitAll()
 //                .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
                 .and().csrf().disable();
-
-//        http.antMatcher("/**").authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .oauth2Login()
-//                    .loginPage("/login");
-//                    .userInfoEndpoint().userService(oauth2UserService);
-
-
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors();
     }
-
 }
