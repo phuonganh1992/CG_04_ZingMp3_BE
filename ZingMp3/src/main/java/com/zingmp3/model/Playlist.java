@@ -13,28 +13,42 @@ public class Playlist {
 
     private String description;
 
+    private String img;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Artist> artists;
 
     @ManyToOne
     private User user;
 
-    public Playlist(Long id, String name, String description, Set<Artist> artists, User user) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.artists = artists;
-        this.user = user;
-    }
+
 
     public Playlist() {
     }
 
-    public Playlist(String name, String description, Set<Artist> artists, User user) {
+    public Playlist(Long id, String name, String description, String img, Set<Artist> artists, User user) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.img = img;
         this.artists = artists;
         this.user = user;
+    }
+
+    public Playlist(String name, String description, String img, Set<Artist> artists, User user) {
+        this.name = name;
+        this.description = description;
+        this.img = img;
+        this.artists = artists;
+        this.user = user;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Long getId() {
