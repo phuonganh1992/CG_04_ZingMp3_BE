@@ -26,8 +26,6 @@
 
 </div>
 
-
-
 <!--Modal create-->
 <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -108,8 +106,6 @@
     </div>
 </div>
 
-
-
 <script>
     // hiển thị danh sách
     function showList() {
@@ -118,7 +114,6 @@
             type: "GET",
             url: "/playlists",
             success: function (data) {
-                console.log(data)
                 let content = `<table class="table table-striped">
         <thead>
         <tr>
@@ -162,7 +157,16 @@
             type: "GET",
             url: "/playlists/search?name=" + searchKey,  // lấy dữ liệu từ API search
             success: function (data) {
-                let content = ""
+                let content = `<table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">User</th>
+            <th scope="col" colspan="2">Action</th>
+        </tr>
+        </thead>`
                 for (let i = 0; i < data.length; i++) {
                     content += getListPlaylist(data[i])
 
@@ -273,8 +277,6 @@
         })
         event.preventDefault()
     }
-
-
 </script>
 </body>
 </html>
