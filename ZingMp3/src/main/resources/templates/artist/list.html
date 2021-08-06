@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function loadData(){
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/api/artist",
+                success:function (list){
+                    console.log(list)
+                    let str="";
+                    for(let i=0;i<list.length;i++){
+                        str+="<br><span>" + list[i].image+" | "+list[i].name+" | "+list[i].description
+                            +"<button onclick='showFormEdit("+ list[i].id+")'>Edit</button>"
+                            +"<button onclick='showFormDelete("+ list[i].id+")'>Delete</button></span>"
+                    }
+                    document.getElementById("content").innerHTML = str;
+                }
+            })
+        }
+
+        function showFormEdit(id){
+            $.ajax({
+                type: "GET",
+                url:"http://localhost:8080/api/artist/"+id,
+                success:function (list){
+                    document.getElementById("form").innerHTML='<input type="text" placeholder="image" id="image" value="' +list.image+ '">\n'
+                        +'<input type="text" placeholder="name" id="name" value="'+ list.name+'">\n'
+                        +'<input type="text" placeholder="description" id="description" value="'+ list.description+'">\n'
+                        +'<button onclick="saveEdit('+ list.id+')">Save</button>'
+                }
+            })
+        }
+        function saveEdit(id){
+            let artist={
+                image:document.getElementById("image").value,
+                name:document.getElementById("name").value,
+                description:document.getElementById("description").value,
+            }
+            console.log(artist)
+            $.ajax({
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type:"PUT",
+                url:"http://localhost:8080/api/artist/"+id,
+                data:JSON.stringify(artist),
+                success:loadData,
+                error:function (error){
+
+                }
+            });
+            document.getElementById("form").innerHTML = '<button onclick="showFormCreate()">Add</button>\n' +
+                '    <button onclick="showFormSearch()">Search</button>'
+        }
+        function showFormDelete(id){
+            $.ajax({
+                type: "GET",
+                url:"http://localhost:8080/api/artist/"+id,
+                success:function (list){
+                    document.getElementById("form").innerHTML='<input type="text" placeholder="image" id="image" value="' +list.image+ '">\n'
+                        +'<input type="text" placeholder="name" id="name" value="'+ list.name+'">\n'
+                        +'<input type="text" placeholder="description" id="description" value="'+ list.description+'">\n'
+                        +'<button onclick="saveDelete('+ list.id+')">Save</button>'
+                }
+            })
+        }
+        function saveDelete(id){
+            let artist={
+                image:document.getElementById("image").value,
+                name:document.getElementById("name").value,
+                description:document.getElementById("description".value)
+            }
+            console.log(artist)
+            $.ajax({
+                headers: {
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type:"DELETE",
+                url:"http://localhost:8080/api/artist/"+id,
+                data: JSON.stringify(artist),
+                success:loadData,
+                error:function (error){
+
+                }
+            })
+            document.getElementById("form").innerHTML = '<button onclick="showFormCreate()">Add</button>\n' +
+                '    <button onclick="showFormSearch()">Search</button>'
+        }
+
+        function showFormCreate(){
+            document.getElementById("form").innerHTML='<input type="text" placeholder="image" id="image" value="">\n'
+                +'<input type="text" placeholder="name" id="name"> \n'
+                +'<input type="text" placeholder="description" id="description"> \n'
+                +'<button onclick="save()">Save</button>'
+
+        }
+        function save(){
+            let artist ={
+                image:document.getElementById("image").value,
+                name:document.getElementById("name").value,
+                description:document.getElementById("description").value
+            }
+            console.log(artist)
+            $.ajax({
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type:"POST",
+                url:"http://localhost:8080/api/artist",
+                data:JSON.stringify(artist),
+                success:loadData,
+                error:function (error){
+
+                }
+            })
+            document.getElementById("form").innerHTML = '<button onclick="showFormCreate()">Add</button>\n' +
+                '    <button onclick="showFormSearch()">Search</button>'
+        } function showFormSearch(){
+            document.getElementById("form").innerHTML='<input type="text" placeholder="name" id="name">\n'
+                +'<button onclick="search()">Search</button>'
+        }
+        function search(){
+            let name=document.getElementById('name').value
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8080/api/artist/search?name="+name,
+                success:function (list){
+                    console.log(list)
+                    let str="";
+                    for(let i=0;i<list.length;i++){
+                        str+="<br><span>"+list[i].image+" | "+list[i].name+" | "+list[i].description
+                            +"<button onclick='showFormEdit("+ list[i].id+")'>Edit</button></span>"
+                            +"<button onclick='showFormDelete("+list[i].id+")'>Delte</button></span>"
+                    }
+                    document.getElementById("abc").innerHTML=str;
+                }
+
+            })
+            document.getElementById("form").innerHTML = '<button onclick="showFormCreate()">Add</button>\n' +
+                '    <button onclick="showFormSearch()">Search</button>'
+        }
+
+
+
+    </script>
+</head>
+<body onload="loadData()">
+<div id="content"></div>
+
+<div id="form">
+    <button onclick="showFormCreate()">Create</button>
+    <button onclick="showFormSearch()">Search</button>
+</div>
+<div id="abc"></div>
+</body>
+</html>
