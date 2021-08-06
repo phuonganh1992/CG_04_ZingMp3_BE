@@ -30,10 +30,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/login")
+    @GetMapping("/login/oauth2")
     public ModelAndView showLoginForm(){
         return new ModelAndView("/user/login");
     }
+
+
 
     @GetMapping("/api/list")
     public ResponseEntity<Iterable<User>> findAllApi(){
@@ -60,10 +62,19 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
 
-//    @GetMapping("/login-google")
+
 
     @GetMapping("/api/hello")
     public ResponseEntity<String> helloApi() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public String helloworld(){
+        return "Hello World";
+    }
+    @GetMapping("/restricted")
+    public String restricted(){
+        return "anything";
     }
 }

@@ -1,6 +1,5 @@
 package com.zingmp3.security;
 
-import com.zingmp3.service.CustomOauth2UserService;
 import com.zingmp3.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -58,24 +56,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
         http.authorizeRequests()
-                .antMatchers("/","/api/register","/api/login","/api/hello").permitAll()
-                .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/","/api/register","/api/login","/api/hello").permitAll()
+                .antMatchers("/**").permitAll()
+//                .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
                 .and().csrf().disable();
 
-//        http.authorizeRequests()
-//                .antMatchers("/oauth2/**","/login").permitAll()
-//                .antMatchers("/api/list").access("hasRole('ROLE_ADMIN')")
-//                .and()
-//                .formLogin()//
-//                    .loginProcessingUrl("/j_spring_security_login")
-//                    .loginPage("/login")
-//                    .defaultSuccessUrl("/")
-//                .and()
-//                .logout().permitAll()
+//        http.antMatcher("/**").authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .anyRequest().authenticated()
 //                .and()
 //                .oauth2Login()
-//                    .loginPage("/login")
+//                    .loginPage("/login");
 //                    .userInfoEndpoint().userService(oauth2UserService);
+
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
@@ -84,6 +77,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
     }
 
-    @Autowired
-    private CustomOauth2UserService oauth2UserService;
 }
