@@ -48,10 +48,10 @@ $("#btn_login").click(function (){
             'Content-type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/api/login",
+        url: "http://localhost:8080/user/api/login",
         data: JSON.stringify(user),
         success: function (data) {
-            console.log(data.token)
+            closeLoginForm();
             localStorage.setItem('token', data.token)
             loadToken(data.token)
         }
@@ -62,7 +62,7 @@ $("#btn_login").click(function (){
 function loadToken(token) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/list",
+        url: "http://localhost:8080/user/api/list",
         headers: {"Authorization": 'Bearer ' + token},
         success: function (data) {
             console.log(data);
@@ -87,7 +87,7 @@ function register() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:8080/api/register",
+            url: "http://localhost:8080/user/api/register",
             data: JSON.stringify(user),
             success: function () {
                 alert("new user is created")

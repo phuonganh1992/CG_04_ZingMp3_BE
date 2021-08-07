@@ -25,7 +25,7 @@ public class User {
 
     private String phoneNumber;
 
-    private String image = "https://firebasestorage.googleapis.com/v0/b/spa-stay.appspot.com/o/img%2F1583085901039?alt=media&token=e396af18-3aa6-49ae-8ffc-22a55124b18a";
+    private String image = "https://firebasestorage.googleapis.com/v0/b/zingmp3-project.appspot.com/o/user_default.png?alt=media&token=e082143e-5690-4f4e-a633-a353ba465e7a";
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;

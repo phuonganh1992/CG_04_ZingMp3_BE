@@ -17,9 +17,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -45,6 +47,20 @@ public class UserController {
     public ResponseEntity<Iterable<User>> findAllApi() {
         Iterable<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/{id}")
+    public ResponseEntity<User> findByIdApi(@PathVariable Long id) {
+        Optional<User> userOptional=userService.findById(id);
+        if(!userOptional.isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/api/{username}")
+    public ResponseEntity<User> findByUsernameApi(@PathVariable String username){
+        Optional<User> userOptional=userService.findByUsername(username);
+        if(!userOptional.isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping("/api/register")
