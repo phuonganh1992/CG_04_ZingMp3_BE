@@ -12,6 +12,7 @@ public class Artist {
     private String name;
 
     private String description;
+    private String image;
 
     public Artist(Long id, String name, String description) {
         this.id = id;
@@ -22,9 +23,18 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String name, String description) {
+    public Artist(String name, String description,String image) {
         this.name = name;
         this.description = description;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Long getId() {

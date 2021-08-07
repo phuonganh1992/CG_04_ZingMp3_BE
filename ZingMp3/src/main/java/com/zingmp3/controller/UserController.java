@@ -30,21 +30,22 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/login")
-    public ModelAndView showLoginForm(){
+    @GetMapping("/login/oauth2")
+    public ModelAndView showLoginForm() {
         return new ModelAndView("/user/login");
     }
 
+
     @GetMapping("/api/list")
-    public ResponseEntity<Iterable<User>> findAllApi(){
-        Iterable<User> users= userService.findAll();
+    public ResponseEntity<Iterable<User>> findAllApi() {
+        Iterable<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping("/api/register")
-    public ResponseEntity<?> registerApi(@RequestBody User user){
+    public ResponseEntity<?> registerApi(@RequestBody User user) {
         userService.save(user);
-        return new ResponseEntity<>(user,HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PostMapping("/api/login")
@@ -55,12 +56,10 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtService.generateTokenLogin(authentication);
-        UserPrinciple userPrinciple= (UserPrinciple) authentication.getPrincipal();
+        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
         User currentUser = userService.findByUsername(user.getUsername()).get();
-        return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
-
-//    @GetMapping("/login-google")
 
     @GetMapping("/api/hello")
     public ResponseEntity<String> helloApi() {

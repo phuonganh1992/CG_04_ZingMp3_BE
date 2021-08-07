@@ -1,8 +1,7 @@
 package com.zingmp3.service.playlist;
 
 import com.zingmp3.model.Playlist;
-import com.zingmp3.model.Role;
-import com.zingmp3.repository.IRoleRepository;
+import com.zingmp3.repository.IPlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,30 +10,34 @@ import java.util.Optional;
 @Service
 public class PlaylistService implements IPlaylistService {
     @Autowired
-    private IPlaylistService playlistService;
+    private IPlaylistRepository playlistRepository;
+
 
     @Override
     public Iterable<Playlist> findAll() {
-        return playlistService.findAll();
+
+
+        return playlistRepository.findAll();
     }
 
     @Override
     public Optional<Playlist> findById(Long id) {
-        return playlistService.findById(id);
+        return playlistRepository.findById(id);
     }
 
     @Override
     public Playlist save(Playlist playlist) {
-        return playlistService.save(playlist);
+        return playlistRepository.save(playlist);
     }
 
     @Override
     public void delete(Long id) {
-        playlistService.delete(id);
+        playlistRepository.deleteById(id);
     }
 
+
     @Override
-    public Playlist findByName(String name) {
-        return playlistService.findByName(name);
+    public Iterable<Playlist> findByNameContaining(String name) {
+        return playlistRepository.findByNameContaining(name);
     }
 }

@@ -52,7 +52,7 @@ public class SongController {
         songService.delete(id);
         return new ResponseEntity<>(songOptional.get(),HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<Iterable<Song>> searchName(@RequestParam String name) {
         Iterable<Song> songs = songService.findAllByNameContaining(name);
         return new ResponseEntity(songs, HttpStatus.OK);
