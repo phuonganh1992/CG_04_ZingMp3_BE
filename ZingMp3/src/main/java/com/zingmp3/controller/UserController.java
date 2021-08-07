@@ -32,45 +32,41 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/home")
-    public ModelAndView showLoginForm() {
-        return new ModelAndView("/home");
-    }
-
-    @GetMapping("/layout")
-    public ModelAndView showlayout() {
-        return new ModelAndView("/layout");
-    }
-
-
     @GetMapping("/api/list")
-    public ResponseEntity<Iterable<User>> findAllApi() {
+    public ResponseEntity<Iterable<User>> findAll() {
         Iterable<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/api/{id}")
-    public ResponseEntity<User> findByIdApi(@PathVariable Long id) {
+    public ResponseEntity<User> findById(@PathVariable Long id) {
         Optional<User> userOptional=userService.findById(id);
         if(!userOptional.isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 
-    @GetMapping("/api/{username}")
-    public ResponseEntity<User> findByUsernameApi(@PathVariable String username){
+//    @GetMapping("/api/search/{username}")
+//    public ResponseEntity<User> findByUsername(@PathVariable String username){
+//        Optional<User> userOptional=userService.findByUsername(username);
+//        if(!userOptional.isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
+//    }
+
+    @GetMapping("/api/search")
+    public ResponseEntity<User> findByUsername(@RequestParam String username){
         Optional<User> userOptional=userService.findByUsername(username);
         if(!userOptional.isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping("/api/register")
-    public ResponseEntity<?> registerApi(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity<?> loginApi(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
@@ -82,8 +78,4 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userPrinciple.getUsername(), currentUser.getName(), userPrinciple.getAuthorities()));
     }
 
-    @GetMapping("/api/hello")
-    public ResponseEntity<String> helloApi() {
-        return new ResponseEntity<>("Hello World", HttpStatus.OK);
-    }
 }
