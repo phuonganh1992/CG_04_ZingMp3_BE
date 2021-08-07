@@ -35,6 +35,11 @@ public class UserController {
         return new ModelAndView("/home");
     }
 
+    @GetMapping("/layout")
+    public ModelAndView showlayout() {
+        return new ModelAndView("/layout");
+    }
+
 
     @GetMapping("/api/list")
     public ResponseEntity<Iterable<User>> findAllApi() {

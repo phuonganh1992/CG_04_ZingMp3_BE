@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Layout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{CSS_Login.css}">
+
+
 </head>
 <body>
 <div class="container">
@@ -94,18 +99,138 @@
 
                         </li>
                         <li class="nav-item">
-                            <button>Login</button>
-
-                        </li>
-                        <li class="nav-item">
-                            <button>SignUp</button>
-
+                            <button class="btn btn-outline-success" type="submit" onclick="openLoginForm()">Login/SignUp</button>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
+    </div>
+    <div class="row mt-3" th:fragment="login">
+        <div class="popup-overlay"></div>
+        <div class="popup">
+            <div class="popup-close" onclick="closeLoginForm()">x</div>
+            <div class="form" id="formLogin">
+                <table style="width: 700px;padding: unset" border="1px solid grey">
+                    <tr>
+                        <div class="avatar">
+                            <img src="https://bit.ly/31pHqJb">
+                        </div>
+                        <div class="header">
+                            Member login
+                        </div>
+
+                    </tr>
+                    <tr>
+                        <td width="60%">
+                            <div class="element">
+                                <input type="text" id="username" placeholder="username" required>
+                            </div>
+                            <div class="element">
+                                <input type="password" id="password" placeholder="password" required>
+                                <button id="showPass1"
+                                        style="width: 30px;height:10px;position: relative;background:none;top: -41px; left: 332px;">
+                                    <img src="https://icons.iconarchive.com/icons/iconsmind/outline/128/Eye-2-icon.png"
+                                         style="width: 20px"></button>
+                            </div>
+                            <div class="element">
+                                <button id="btn_login">Login</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="text-align: center;margin-top: -50px">
+                                Not a member?
+                            </div>
+                            <div style="text-align: center">
+                                <button id="btn_signup">Sign up</button>
+                            </div>
+                            <div class="auth" style="text-align: center">
+                                Or login with
+                            </div>
+                            <div class="links">
+                                <a href="" class="social">
+                                    <img src="https://icons.iconarchive.com/icons/yootheme/social-bookmark/256/social-facebook-button-blue-icon.png"
+                                         style="width: 20px; height: 20px">
+                                    Login with facebook
+                                </a>
+                            </div>
+                            <div class="links">
+                                <a href="" class="social">
+                                    <img src="https://icons.iconarchive.com/icons/graphics-vibe/classic-3d-social/256/google-icon.png"
+                                         style="width: 20px; height: 20px">
+                                    Login with gmail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form" id="formRegister">
+                <table style="width: 700px;padding: unset" border="1px solid grey">
+                    <tr>
+                        <div class="avatar">
+                            <img src="https://bit.ly/31pHqJb">
+                        </div>
+                        <div class="header">
+                            Member login
+                        </div>
+
+                    </tr>
+                    <tr>
+                        <td width="60%">
+                            <div class="element">
+                                <input type="text" id="username_regis" placeholder="username" required>
+                            </div>
+                            <div class="element">
+                                <input type="password" id="password_regis" placeholder="password" required>
+                                <button id="showPass2"
+                                        style="width: 30px;height:10px;position: relative;background:none;top: -41px; left: 332px;">
+                                    <img src="https://icons.iconarchive.com/icons/iconsmind/outline/128/Eye-2-icon.png"
+                                         style="width: 20px"></button>
+                                <input type="password" id="re-password_regis" placeholder="password" required>
+                                <button id="showPass3"
+                                        style="width: 30px;height:10px;position: relative;background:none;top: -41px; left: 332px;">
+                                    <img src="https://icons.iconarchive.com/icons/iconsmind/outline/128/Eye-2-icon.png"
+                                         style="width: 20px"></button>
+                            </div>
+                            <div class="element">
+
+                            </div>
+                            <div class="element">
+                                <button id="btn_register">Register</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="text-align: center;margin-top: -50px">
+                                Is a member?
+                            </div>
+                            <div style="text-align: center">
+                                <button id="btn_login2">Login</button>
+                            </div>
+                            <div class="auth" style="text-align: center">
+                                Or login with
+                            </div>
+                            <div class="links">
+                                <a href="" class="social">
+                                    <img src="https://icons.iconarchive.com/icons/yootheme/social-bookmark/256/social-facebook-button-blue-icon.png"
+                                         style="width: 20px; height: 20px">
+                                    Login with facebook
+                                </a>
+
+                            </div>
+                            <div class="links">
+                                <a href="" class="social">
+                                    <img src="https://icons.iconarchive.com/icons/graphics-vibe/classic-3d-social/256/google-icon.png"
+                                         style="width: 20px; height: 20px">
+                                    Login with gmail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
     <div class="row mt-3" th:fragment="carousel">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -153,5 +278,7 @@
         </div>
     </div>
 </div>
+
+<script th:src="@{JS_Login.js}"></script>
 </body>
 </html>
