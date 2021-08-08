@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
+    public static final String IMAGE_DEFAULT = "https://firebasestorage.googleapis.com/v0/b/zingmp3-project.appspot.com/o/user_default.png?alt=media&token=ed94ea59-cd93-4171-8aa7-bf06227fa016";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +26,7 @@ public class User {
 
     private String phoneNumber;
 
-    private String image = "https://firebasestorage.googleapis.com/v0/b/zingmp3-project.appspot.com/o/user_default.png?alt=media&token=e082143e-5690-4f4e-a633-a353ba465e7a";
+    private String image = IMAGE_DEFAULT;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -36,6 +37,15 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, String name, String email, String phoneNumber, String image) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.image = image;
     }
 
     public User(String username, String password, String name, Set<Role> roles) {
