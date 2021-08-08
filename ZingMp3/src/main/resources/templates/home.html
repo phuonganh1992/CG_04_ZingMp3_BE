@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div th:replace="layout::menu"></div>
+    <div th:replace="layout::login"></div>
+    <div th:replace="layout::carousel"></div>
+    <div class="row mt-3">
+        <div class="col-7 text-center" th:replace="layout::main"></div>
+        <div class="col-3 text-center" th:replace="layout::taskbar"></div>
+        <div class="col-2 text-center"  th:replace="layout::adv"></div>
+    </div>
+    <div class="row mt-3" th:fragment="footer"></div>
+</div>
+
+<script th:src="@{JS_Login.js}"></script>
+</body>
+</html>
