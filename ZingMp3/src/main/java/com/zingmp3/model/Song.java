@@ -34,24 +34,24 @@ public class Song {
     public Song() {
     }
 
-    public Song(Long id, String name, String description, String img,String mp3, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(Long id, String name, String description, String img,String mp3, Artist artist, Set<Playlist> playlists, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.img = img;
         this.mp3 =mp3;
-        this.createDate = createDate;
+        this.createDate = LocalDate.now();
         this.artist = artist;
         this.playlists = playlists;
         this.user = user;
     }
 
-    public Song(String name, String description, String img,String mp3, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(String name, String description, String img,String mp3,  Artist artist, Set<Playlist> playlists, User user) {
         this.name = name;
         this.description = description;
         this.img = img;
         this.mp3 =mp3;
-        this.createDate = createDate;
+        this.createDate = LocalDate.now();
         this.artist = artist;
         this.playlists = playlists;
         this.user = user;
