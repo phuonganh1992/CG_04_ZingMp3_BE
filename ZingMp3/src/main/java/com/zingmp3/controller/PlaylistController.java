@@ -16,10 +16,10 @@ import java.util.Optional;
 public class PlaylistController {
     @Autowired
     IPlaylistService playlistService;
-    @GetMapping("/list")
-    public ModelAndView showlist(){
-        return new ModelAndView("/playlist/list");
-    }
+//    @GetMapping("/list")
+//    public ModelAndView showlist(){
+//        return new ModelAndView("/playlist/list");
+//    }
     @GetMapping
     public ResponseEntity<Iterable<Playlist>> getList(){
         return new ResponseEntity<>(playlistService.findAll(), HttpStatus.OK);
