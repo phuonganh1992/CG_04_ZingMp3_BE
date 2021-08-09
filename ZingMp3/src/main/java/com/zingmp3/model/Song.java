@@ -97,6 +97,13 @@ public class Song {
         this.img = img;
     }
 
+    public String getMp3() {
+        return mp3;
+    }
+
+    public void setMp3(String mp3) {
+        this.mp3 = mp3;
+    }
 
     public Artist getArtist() {
         return artist;
