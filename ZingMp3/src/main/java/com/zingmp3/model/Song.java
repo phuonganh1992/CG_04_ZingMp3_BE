@@ -18,6 +18,7 @@ public class Song {
     private String description;
 
     private String img;
+    private String mp3;
 
     private LocalDate createDate;
 
@@ -33,21 +34,23 @@ public class Song {
     public Song() {
     }
 
-    public Song(Long id, String name, String description, String img, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(Long id, String name, String description, String img,String mp3, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.img = img;
+        this.mp3 =mp3;
         this.createDate = createDate;
         this.artist = artist;
         this.playlists = playlists;
         this.user = user;
     }
 
-    public Song(String name, String description, String img, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(String name, String description, String img,String mp3, LocalDate createDate, Artist artist, Set<Playlist> playlists, User user) {
         this.name = name;
         this.description = description;
         this.img = img;
+        this.mp3 =mp3;
         this.createDate = createDate;
         this.artist = artist;
         this.playlists = playlists;
@@ -93,6 +96,7 @@ public class Song {
     public void setImg(String img) {
         this.img = img;
     }
+
 
     public Artist getArtist() {
         return artist;
