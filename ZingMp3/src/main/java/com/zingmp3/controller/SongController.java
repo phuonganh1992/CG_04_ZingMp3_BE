@@ -1,12 +1,15 @@
 package com.zingmp3.controller;
 
 import com.zingmp3.model.Song;
+import com.zingmp3.repository.ISongRepository;
 import com.zingmp3.service.song.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class SongController {
   @Autowired
   ISongService songService;
+//  @Autowired
+//    ISongRepository songRepository;
 
     @GetMapping("/songs")
     public ResponseEntity<Iterable<Song>> findAllSong() {
@@ -52,10 +57,15 @@ public class SongController {
         songService.delete(id);
         return new ResponseEntity<>(songOptional.get(),HttpStatus.NO_CONTENT);
     }
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResponseEntity<Iterable<Song>> searchName(@RequestParam String name) {
         Iterable<Song> songs = songService.findAllByNameContaining(name);
         return new ResponseEntity(songs, HttpStatus.OK);
     }
+//    @GetMapping("/songs/date")
+//    public ResponseEntity< List<Song>> getAll (@RequestParam String field) {
+//        List<Song> songs = songRepository.findAll(Sort.by(Sort.Direction.ASC, field));
+//        return new ResponseEntity(songs,HttpStatus.OK);
+//    }
 
 }
