@@ -52,16 +52,6 @@ public class Song {
         this.user = user;
     }
 
-    public Song(String name, String description, String img, String mp3, Artist artist, User user) {
-        this.name = name;
-        this.description = description;
-        this.img = img;
-        this.mp3 = mp3;
-        this.artist = artist;
-        this.user = user;
-        this.createDate=LocalDate.now();
-    }
-
     public LocalDate getCreateDate() {
         return createDate;
     }
