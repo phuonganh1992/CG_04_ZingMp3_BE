@@ -1,6 +1,7 @@
 package com.zingmp3.service.reaction;
 
 import com.zingmp3.model.Reaction;
+import com.zingmp3.model.Song;
 import com.zingmp3.repository.IReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,10 @@ public class ReactionService implements IReactionService{
     @Override
     public void delete(Long id) {
         reactionRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Reaction> findAllBySong(Song song) {
+        return reactionRepository.findAllBySong(song);
     }
 }

@@ -18,7 +18,8 @@ public class Playlist {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Artist> artists;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Song> songs;
     @ManyToOne
     private User user;
 
@@ -90,5 +91,13 @@ public class Playlist {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(Set<Song> songs) {
+        this.songs = songs;
     }
 }

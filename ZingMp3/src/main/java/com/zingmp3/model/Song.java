@@ -24,17 +24,13 @@ public class Song {
 
     @ManyToOne
     private Artist artist;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Playlist> playlists;
-
     @ManyToOne
     private User user;
 
     public Song() {
     }
 
-    public Song(Long id, String name, String description, String img,String mp3, Artist artist, Set<Playlist> playlists, User user) {
+    public Song(Long id, String name, String description, String img,String mp3, Artist artist, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,18 +38,16 @@ public class Song {
         this.mp3 =mp3;
         this.createDate = LocalDate.now();
         this.artist = artist;
-        this.playlists = playlists;
         this.user = user;
     }
 
-    public Song(String name, String description, String img,String mp3,  Artist artist, Set<Playlist> playlists, User user) {
+    public Song(String name, String description, String img,String mp3,  Artist artist,  User user) {
         this.name = name;
         this.description = description;
         this.img = img;
         this.mp3 =mp3;
         this.createDate = LocalDate.now();
         this.artist = artist;
-        this.playlists = playlists;
         this.user = user;
     }
 
@@ -111,14 +105,6 @@ public class Song {
 
     public void setArtist(Artist artist) {
         this.artist = artist;
-    }
-
-    public Set<Playlist> getPlaylists() {
-        return playlists;
-    }
-
-    public void setPlaylists(Set<Playlist> playlists) {
-        this.playlists = playlists;
     }
 
     public User getUser() {
