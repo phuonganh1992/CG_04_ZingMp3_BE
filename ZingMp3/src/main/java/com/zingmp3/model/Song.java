@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "songs")
 public class Song {
+    public static final String SONG_IMG_DEFAULT = "https://firebasestorage.googleapis.com/v0/b/zingmp3-project.appspot.com/o/song_img_default.png?alt=media&token=272d7864-eef2-4e88-bbda-3e7373f286d3";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +18,7 @@ public class Song {
 
     private String description;
 
-    private String img;
+    private String img= SONG_IMG_DEFAULT;
     private String mp3;
 
     private LocalDate createDate;

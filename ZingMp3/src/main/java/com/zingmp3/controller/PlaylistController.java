@@ -2,6 +2,7 @@ package com.zingmp3.controller;
 
 import com.zingmp3.model.Playlist;
 import com.zingmp3.service.playlist.IPlaylistService;
+import com.zingmp3.service.song.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class PlaylistController {
     @Autowired
     IPlaylistService playlistService;
-    @GetMapping("/list")
-    public ModelAndView showlist(){
-        return new ModelAndView("/playlist/list");
-    }
+    @Autowired
+    ISongService songService;
+//    @GetMapping("/list")
+//    public ModelAndView showlist(){
+//        return new ModelAndView("/playlist/list");
+//    }
     @GetMapping
     public ResponseEntity<Iterable<Playlist>> getList(){
         return new ResponseEntity<>(playlistService.findAll(), HttpStatus.OK);
