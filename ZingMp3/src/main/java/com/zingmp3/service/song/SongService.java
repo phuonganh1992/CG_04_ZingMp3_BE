@@ -3,6 +3,7 @@ package com.zingmp3.service.song;
 import com.zingmp3.model.Song;
 import com.zingmp3.repository.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -38,5 +39,10 @@ public class SongService implements ISongService{
     @Override
     public Iterable<Song> findAllByNameContaining(String name) {
         return songRepository.findAllByNameContaining(name);
+    }
+
+    @Override
+    public Iterable<Song> findAll(Sort sort) {
+        return songRepository.findAll(sort);
     }
 }
