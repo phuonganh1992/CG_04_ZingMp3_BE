@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -24,6 +25,7 @@ public class SongController {
 
     @PostMapping("/songs")
     public ResponseEntity<Void> create(@RequestBody Song song) {
+        song.setCreateDate(LocalDate.now());
         songService.save(song);
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -52,9 +54,10 @@ public class SongController {
         songService.delete(id);
         return new ResponseEntity<>(songOptional.get(),HttpStatus.NO_CONTENT);
     }
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResponseEntity<Iterable<Song>> searchName(@RequestParam String name) {
         Iterable<Song> songs = songService.findAllByNameContaining(name);
         return new ResponseEntity(songs, HttpStatus.OK);
     }
+
 }
