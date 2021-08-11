@@ -6,24 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/artist")
+@RequestMapping("/api/artists")
 public class ArtistController {
     @Autowired
     private IArtistService artistService;
 
     @GetMapping
     public ResponseEntity<Iterable<Artist>> findAllArtist() {
-        List<Artist> artistList = (List<Artist>) artistService.findAll();
-        if (artistList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+        Iterable<Artist> artistList =  artistService.findAll();
+
         return new ResponseEntity<>(artistList, HttpStatus.OK);
     }
 
@@ -62,10 +58,7 @@ public class ArtistController {
 
     @PostMapping("/search")
     public ResponseEntity<Iterable<Artist>>searchArtist(@RequestParam String name){
-List<Artist> artists= (List<Artist>) artistService.findAllByName(name);
-if(artists.isEmpty()){
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-}
+Iterable<Artist> artists= artistService.findAllByName(name);
 return new ResponseEntity<>(artists,HttpStatus.OK);
     }
 }
