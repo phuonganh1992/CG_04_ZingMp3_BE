@@ -1,6 +1,7 @@
 package com.zingmp3.controller;
 
 import com.zingmp3.model.Song;
+import com.zingmp3.repository.ISongRepository;
 import com.zingmp3.service.song.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class SongController {
   @Autowired
   ISongService songService;
+  @Autowired
+    ISongRepository songRepository;
 
     @GetMapping("/songs")
     public ResponseEntity<Iterable<Song>> findAllSong() {
