@@ -39,6 +39,7 @@ out/
 build
 .gradle
 .idea
+phuonganh.env
 
 
 
