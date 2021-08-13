@@ -15,4 +15,5 @@ import java.util.Optional;
 @Repository
 public interface ISongRepository extends PagingAndSortingRepository<Song,Long> {
    Iterable<Song> findAllByNameContaining(String name);
+   Iterable<Song>findAllByArtist_id(Long id);
 }

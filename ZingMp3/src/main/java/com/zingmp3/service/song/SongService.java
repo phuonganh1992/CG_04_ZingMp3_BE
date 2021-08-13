@@ -45,4 +45,9 @@ public class SongService implements ISongService{
     public Iterable<Song> findAll(Sort sort) {
         return songRepository.findAll(sort);
     }
+
+    @Override
+    public Iterable<Song> findAllByArtist_id(Long id) {
+        return songRepository.findAllByArtist_id(id);
+    }
 }

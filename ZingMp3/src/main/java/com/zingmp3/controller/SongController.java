@@ -69,5 +69,10 @@ public class SongController {
         Iterable<Song> songs = songService.findAll(Sort.by(Sort.Direction.DESC, field));
         return new ResponseEntity(songs, HttpStatus.OK);
     }
+    @GetMapping("/song/artist/{id}")
+    public ResponseEntity<Iterable<Song>> findByArtistId(@PathVariable Long id){
+        Iterable<Song>songIterable=songService.findAllByArtist_id(id);
+        return new ResponseEntity<>(songIterable,HttpStatus.OK);
+    }
 
 }
